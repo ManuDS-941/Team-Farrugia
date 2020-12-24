@@ -9,18 +9,29 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
-/* Menu Navigation */
+.corps{
+    min-height: 67vh;
+}
+/* DEBUT NAVBAR */
 
 nav{
     height: 80px;
-    /* background: red; */
 }
 
 nav img{
     width: 50px;
     position: absolute;
     top: 17px;
-    left: 7%;
+    left: 50px;
+    border-radius: 40%;
+}
+
+.titrelogo{
+    width: 200px;
+    position: absolute;
+    top: 30px;
+    left: 120px;
+    color: white;
 }
 
 nav ul{
@@ -79,19 +90,15 @@ label #btn, label #cancel{
 }
 
 @media (max-width: 1118px){
-    nav img{
-        left: 8%;
-    }
+    
 }
 
 @media (max-width: 944px){
-    nav img{
-        left: 6%;
-        top: 20px;
-        width: 50px;
+    nav ul li{
+        margin: 0 15px;
     }
     nav ul li a{
-        font-size: 17px;
+        font-size: 12px;
     }
 }
 
@@ -103,7 +110,7 @@ label #btn, label #cancel{
         position: fixed;
         width: 100%;
         height: 100vh;
-        background-color: rgb(80, 3, 3);
+        background-color: rgb(39, 35, 35);
         top: 80px;
         left: -100%;
         text-align: center;
@@ -126,4 +133,90 @@ label #btn, label #cancel{
     #check:checked ~ label #cancel{
         display: block;
     }
+}
+
+/* FIN NAVBAR */
+
+/* ACCUEIL */
+
+.accueil-titre{
+    text-align: center;
+    margin: 50px 0;
+}
+
+.interview{
+    text-align: center;
+}
+
+/* FIN ACCUEIL */
+
+/* HISTOIRE */
+
+.histoire{
+    display: flex;
+    margin: 10px;
+}
+.histoire p{
+    min-width: 300px;
+}
+
+.histoire-image{
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.histoire-image img{
+    width: 400px;
+    margin-bottom: 15px;
+}
+
+.histoire-image span{
+    width: 300px;
+    text-align: end;
+}
+
+/* Responsive */
+
+@media all and (max-width: 800px){
+    .histoire{
+        display: inline;
+        text-align: center;
+    }
+    .histoire span p{
+        text-align: center;
+    }
+    .histoire-image{
+        margin-bottom: 100px;
+    }
+}
+
+/* FIN HISTOIRE */
+
+/* EFFECTIF */
+
+
+/* MEDIA */
+
+
+/* INFORMATIONS */
+
+
+/* FOOTER */
+
+footer{
+    min-height: 150px;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+footer .elancourt{
+    width: 300px;
+    height: 100px;
+    font-size: 12px;
+    padding: 15px;
+}
+
+.copy{
+    text-align: center;
 }
