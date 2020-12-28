@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team Farrugia : Administrateur{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center mt-4">Connexion</h1>
+
+    <form action="{{ path('connexion') }}" method="post" class="col-md-3 mx-auto">
+
+        <div class="from-group">
+            <label for="">E-Mail :</label>
+            <input type="text" class="form-control" id="_username" name="_username" value="{{ last_username }}">
+        </div>
+        {# on stock dans l'attribut 'value' le dernier mail saisi par l'internaute encas d'erreur d'authentification #}
+            {# last_username : variable qui provient du controller SecurityController #}
+
+        <div class="from-group mt-2">
+            <label for="">Mot de Passe :</label>
+            <input type="password" class="form-control" id="_password" name="_password">
+        </div>
+
+        <input type="submit" class="btn btn-dark mt-3" value="Connexion">
+    </form>
+
+{% endblock %}

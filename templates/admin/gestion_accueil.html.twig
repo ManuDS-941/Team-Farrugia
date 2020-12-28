@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team Farrugia : Gestion Administrateur{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center mt-4">Administrateur (dynamique en fonction page) </h1>
+
+    <div class="text-center">
+        {% if request.requestUri == '/admin/accueil' %}
+            <a href="{{path('admin_accueil')}}" class="btn bg-danger">Gestions Accueil</a>
+        {% endif %}
+        <a href="{{path('admin_medias')}}" class="btn">Gestions Médias</a>
+        <a href="{{path('admin_info')}}" class="btn">Gestions Informations</a>
+        <a href="{{path('admin_message')}}" class="btn">Messages (nombre message)</a>
+        <a href="{{path('admin_user')}}" class="btn">Gestion des utilisateurs</a>
+    </div>
+
+
+{% endblock %}
