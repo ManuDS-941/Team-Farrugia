@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team Farrugia : Gestion Administrateur{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center mt-4">Messages ({{ message|length }}) </h1>
+
+    <div class="text-center m-4">
+        <a href="{{path('admin_accueil')}}" class="btn">Gestions Accueil</a>
+        <a href="{{path('admin_medias')}}" class="btn">Gestions Médias</a>
+        <a href="{{path('admin_info')}}" class="btn">Gestions Informations</a>
+        {% if request.requestUri == '/admin/message' %}
+            <a href="{{path('admin_message')}}" class="btn bg-danger">Messages ({{ message|length }}) </a>
+        {% endif %}
+        <a href="{{path('admin_user')}}" class="btn">Gestion des Utilisateurs </a>
+    </div>
+
+    <div class="container">
+
+        <table class="table table-bordered shadow">
+            <tr class="text-center">
+                {% for data in tableau %}
+                    <th>
+                        {{ data|upper }}
+                    </th>
+                {% endfor %}
+                    <th>REPONDRE</th>
+                    <th>SUPPRIMER</th>
+            </tr>
+            
+            <tr class="text-center">
+                {% for data in message %}
+
+                <td>{{ data.id }}</td>
+                    <td>{{ data.nom }}</td>
+                    <td>{{ data.prenom }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.objet }}</td>
+                    <td>{{ data.message }}</td>
+                    
+                {% endfor %}
+                <td></td>
+                <td>X</td>
+            </tr>
+        </table>
+    </div>
+    
+{% endblock %}
