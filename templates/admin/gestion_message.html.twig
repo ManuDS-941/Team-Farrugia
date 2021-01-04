@@ -7,13 +7,35 @@
     <h1 class="text-center mt-4">Messages ({{ message|length }}) </h1>
 
     <div class="text-center m-4">
-        <a href="{{path('admin_accueil')}}" class="btn">Gestions Accueil</a>
-        <a href="{{path('admin_medias')}}" class="btn">Gestions Médias</a>
-        <a href="{{path('admin_info')}}" class="btn">Gestions Informations</a>
+        {% if request.requestUri == '/admin/accueil' or request.requestUri == '/admin' %}
+            <a href="{{path('admin_accueil')}}" class="btn bg-danger">Gestions Accueil</a>
+        {% else %}
+            <a href="{{path('admin_accueil')}}" class="btn">Gestions Accueil</a>
+        {% endif %}
+
+        {% if request.requestUri == '/admin/medias' %}
+            <a href="{{path('admin_medias')}}" class="btn bg-danger">Gestions Médias</a>
+        {% else %}
+            <a href="{{path('admin_medias')}}" class="btn">Gestions Médias</a>
+        {% endif %}
+        
+        {% if request.requestUri == '/admin/info' %}
+            <a href="{{path('admin_info')}}" class="btn bg-danger">Gestions Informations</a>
+        {% else %}
+            <a href="{{path('admin_info')}}" class="btn">Gestions Informations</a>
+        {% endif %}
+        
         {% if request.requestUri == '/admin/message' %}
             <a href="{{path('admin_message')}}" class="btn bg-danger">Messages ({{ message|length }}) </a>
+        {% else %}
+            <a href="{{path('admin_message')}}" class="btn">Messages ({{ message|length }}) </a>
         {% endif %}
-        <a href="{{path('admin_user')}}" class="btn">Gestion des Utilisateurs </a>
+
+        {% if request.requestUri == '/admin/user' %}
+            <a href="{{path('admin_user')}}" class="btn bg-danger">Gestions des Utilisateurs</a>
+        {% else %}
+            <a href="{{path('admin_user')}}" class="btn">Gestion des Utilisateurs </a>
+        {% endif %}
     </div>
 
     <div class="container">
@@ -33,15 +55,16 @@
                 {% for data in message %}
 
                 <td>{{ data.id }}</td>
-                    <td>{{ data.nom }}</td>
-                    <td>{{ data.prenom }}</td>
-                    <td>{{ data.email }}</td>
-                    <td>{{ data.objet }}</td>
-                    <td>{{ data.message }}</td>
+                <td>{{ data.nom }}</td>
+                <td>{{ data.prenom }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.objet }}</td>
+                <td>{{ data.message }}</td>
                     
+                <td><a href="mailto:{{ data.email }}" class="btn btn-success text-white"><i class="fas fa-envelope"></i></a></td>
                 {% endfor %}
-                <td></td>
-                <td>X</td>
+                <td class="align-middle"><a href="" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer ce message ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
+                
             </tr>
         </table>
     </div>

@@ -8,9 +8,32 @@
     <h1 class="accueil-titre">BIENVENUE A LA TEAM FARRUGIA</h1>
 
     <div class="interview">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/AH3ST9KoCZI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/AH3ST9KoCZI" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <div class="text-center">
+            <small>Reportage du 21 Novembre 2018</small>
+        </div>
 </div>
-    
-{% endblock %}
 
+<hr class="mx-auto w-75 bg-danger mt-4 mb-4">
+
+<div class="container">
+
+    {% for data in accueil %}
+        
+
+        <div class="card mb-3 w-75 mx-auto p-4">
+            <img class="card-img-top mx-auto" src="/image/{{ data.image }} " style="max-width:500px; max-height:500px;" alt="{{ data.image }} ">
+            <div class="card-body">
+                <h5 class="card-title">{{ data.titre}} </h5>
+                <p class="card-text">{{ data.description}} </p>
+                <p class="card-text float-right"><small class="text-muted">Posté le {{ data.createdAt|date('d/m/Y')}} à {{ data.createdAt|date('H')}}h{{ data.createdAt|date('i')}}</small></p>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

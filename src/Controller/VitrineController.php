@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Repository\AccueilRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,12 @@ class VitrineController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function index(): Response
+    public function index(AccueilRepository $repo): Response
     {
+        $accueil = $repo->findAll();
+
         return $this->render('vitrine/index.html.twig', [
-            'controller_name' => 'VitrineController',
+            'accueil' => $accueil
         ]);
     }
     /**
