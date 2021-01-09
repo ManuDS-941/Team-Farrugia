@@ -5,35 +5,139 @@
 <h1 class="text-center mt-4">Gestions des Informations</h1>
 
 <div class="text-center m-4">
-    {% if request.requestUri == '/admin/accueil' or request.requestUri == '/admin' %}
+    {% if request.pathInfo == '/admin/accueil' or request.pathInfo == '/admin' %}
         <a href="{{path('admin_accueil')}}" class="btn bg-danger">Gestions Accueil</a>
     {% else %}
         <a href="{{path('admin_accueil')}}" class="btn">Gestions Accueil</a>
     {% endif %}
 
-    {% if request.requestUri == '/admin/medias' %}
+    {% if request.pathInfo == '/admin/medias' %}
         <a href="{{path('admin_medias')}}" class="btn bg-danger">Gestions Médias</a>
     {% else %}
         <a href="{{path('admin_medias')}}" class="btn">Gestions Médias</a>
     {% endif %}
     
-    {% if request.requestUri == '/admin/info' %}
+    {% if request.pathInfo == '/admin/info' %}
         <a href="{{path('admin_info')}}" class="btn bg-danger">Gestions Informations</a>
     {% else %}
         <a href="{{path('admin_info')}}" class="btn">Gestions Informations</a>
     {% endif %}
     
-    {% if request.requestUri == '/admin/message' %}
+    {% if request.pathInfo == '/admin/message' %}
         <a href="{{path('admin_message')}}" class="btn bg-danger">Messages ({{ message|length }}) </a>
     {% else %}
         <a href="{{path('admin_message')}}" class="btn">Messages ({{ message|length }}) </a>
     {% endif %}
 
-    {% if request.requestUri == '/admin/user' %}
+    {% if request.pathInfo == '/admin/user' %}
         <a href="{{path('admin_user')}}" class="btn bg-danger">Gestions des Utilisateurs</a>
     {% else %}
         <a href="{{path('admin_user')}}" class="btn">Gestion des Utilisateurs </a>
     {% endif %}
 </div>
 
+<div class="container mb-4">
+
+
+    {% for message in app.flashes('success') %}
+        <div class="bg-success text-white text-center col-md-4 mx-auto rounded p-3 mb-3">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+
+    
+    <h2 class="text-center">Horaires ({{ horaire|length }})</h2>
+    
+    <table class="table table-bordered mt-4 shadow">
+        <tr class="text-center">
+            {% for data in tableau %}
+                <th>
+                    {{ data|upper }}
+                </th>
+            {% endfor %}
+                <th>MODIFIER</th>
+                <th>SUPPRIMER</th>
+        </tr>
+        {% for data in horaire %}
+            <tr class="text-center">
+                <td>{{ data.id }}</td>
+                <td>{{ data.titre }}</td>
+                <td>{{ data.jour1 }}</td>
+                <td>{{ data.jour2 }}</td>
+                <td>{{ data.jour3 }}</td>
+                <td class="align-middle"><a href="{{ path('admin_horaire_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
+                <td class="align-middle"><a href="{{ path('admin_horaire_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer cet horaire ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('admin_horaire_create') }} " class="btn btn-dark">Ajouter un Horaire</a>
+
+
+
+
+    <h2 class="text-center">Tarif ({{ tarif|length }})</h2>
+    
+    <table class="table table-bordered mt-4 shadow">
+        <tr class="text-center">
+            {% for data in tableau1 %}
+                <th>
+                    {{ data|upper }}
+                </th>
+            {% endfor %}
+            <th>MODIFIER</th>
+            <th>SUPPRIMER</th>
+        </tr>
+        {% for data in tarif %}
+            <tr class="text-center">
+                <td>{{ data.id }}</td>
+                <td>{{ data.titre }}</td>
+                <td>{{ data.prix }}</td>
+                <td class="align-middle"><a href="{{ path('admin_tarif_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
+                <td class="align-middle"><a href="{{ path('admin_tarif_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer ce tarif ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <a href="{{ path('admin_tarif_create') }}" class="btn btn-dark">Ajouter un Tarif</a>
+
+
+
+
+
+
+
+
+    <h2 class="text-center">Site ({{ site|length }})</h2>
+    
+    <table class="table table-responsive table-bordered mt-4 shadow">
+        <tr class="text-center">
+            {% for data in tableau2 %}
+                <th>
+                    {{ data|upper }}
+                </th>
+            {% endfor %}
+                <th>MODIFIER</th>
+                <th>SUPPRIMER</th>
+        </tr>
+        {% for data in site %}
+            <tr class="text-center">
+                <td>{{ data.id }}</td>
+                <td>{{ data.titre }}</td>
+                <td>{{ data.adresse|slice(0,100)|raw }}</td>
+                <td>{{ data.google|slice(1,100)|raw }} ...</td>
+                <td class="align-middle"><a href="{{ path('admin_site_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
+                <td class="align-middle"><a href="{{ path('admin_site_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer ce site ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('admin_site_create')}}" class="btn btn-dark">Ajouter un Site</a>
+
+
+
+
+
+</div>
+    
 {% endblock %}

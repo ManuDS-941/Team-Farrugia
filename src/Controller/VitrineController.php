@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Repository\AccueilRepository;
+use App\Repository\HoraireRepository;
+use App\Repository\SiteRepository;
+use App\Repository\TarifRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,10 +50,16 @@ class VitrineController extends AbstractController
     /**
      * @Route("/information", name="info")
      */
-    public function Information(): Response
+    public function Information(HoraireRepository $repo, TarifRepository $repo1, SiteRepository $repo2): Response
     {
+        $horaire = $repo->findAll();
+        $tarif = $repo1->findAll();
+        $site = $repo2->findAll();
+
         return $this->render('vitrine/info.html.twig', [
-            'controller_name' => 'VitrineController',
+            'horaire' => $horaire,
+            'tarif' => $tarif,
+            'site' => $site
         ]);
     }
 
