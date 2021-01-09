@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajout d'un Site{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mt-4">Ajout d'un Site</h1>
+
+{{ form_start(formSite, {'attr': { 'class': 'col-md-4 mx-auto'}} )}}
+
+
+<div class="form-group">
+    {{ form_row(formSite.titre, {'label': "Titre :", 'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_row(formSite.adresse, {'label': "Adresse :", 'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_row(formSite.google, {'label': "Ajouter la balise Google :", 'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="text-center">
+    <a href="{{ path('admin_info')}}" class="btn btn-dark col-5 mr-2">Retour</a>
+    <button type="submit" class="col-5 btn btn-success mt-4 mb-4">Ajouter</button>
+</div>
+
+{{ form_end(formSite)}}
+
+
+{% endblock %}
