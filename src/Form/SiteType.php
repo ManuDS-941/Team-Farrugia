@@ -14,7 +14,7 @@ class SiteType extends AbstractType
         $builder
             ->add('titre')
             ->add('adresse')
-            ->add('google')
+            // ->add('google')
         ;
     }
 

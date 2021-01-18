@@ -6,6 +6,15 @@
 
     <h1 class="text-center mt-4">Connexion</h1>
 
+    {% if error %}
+
+    <p class="bg-danger text-white text-center p-3 col-md-4 mx-auto rounded">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+        {# trans(error.messageData, 'security') : permet de pointer sur le fichier 'tranlsations/security.en.php' qui contient la personnalisation des messages utilisateurs par défault de Symfony #}
+    </p>
+        
+    {% endif %}
+
     <form action="{{ path('connexion') }}" method="post" class="col-md-3 mx-auto">
 
         <div class="from-group">
@@ -22,5 +31,7 @@
 
         <input type="submit" class="btn btn-dark mt-3" value="Connexion">
     </form>
+
+    {# <div class="text-center mt-4 mb-4">Pas de compte ? <a href="{{ path('inscription') }}" class=""> Inscrivez-vous</a></div> #}
 
 {% endblock %}

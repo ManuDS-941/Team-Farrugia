@@ -16,6 +16,7 @@ class HoraireType extends AbstractType
             ->add('jour1')
             ->add('jour2')
             ->add('jour3')
+            ->add('entraineur')
         ;
     }
 

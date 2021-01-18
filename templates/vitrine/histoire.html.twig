@@ -10,9 +10,12 @@
 
 
 <div class="histoire">
-    <p>Né en mars 1944 à Tunis, Antoine a 4 ans lorsqu'il est réveillé au beau milieu de la nuit par une clameur s'élevant des rues. « La foule célébrait la victoire de Marcel Cerdan, sacré champion du monde aux Etats-Unis. Les jours suivants, j'ai harcelé mon père pour qu'il m'emmène dans une salle de boxe. Et là, j'ai découvert un nouveau monde. Ces images de ring, de sacs avec tous ces gars qui frappent dedans ne m'ont plus quitté.</p>
-
-    <div class="histoire-image">
+    <p class="text-danger">Né en mars 1944 à Tunis, Antoine a 4 ans lorsqu'il est réveillé au beau milieu de la nuit par une clameur s'élevant des rues. « La foule célébrait la victoire de Marcel Cerdan, sacré champion du monde aux Etats-Unis. Les jours suivants, j'ai harcelé mon père pour qu'il m'emmène dans une salle de boxe. Et là, j'ai découvert un nouveau monde. Ces images de ring, de sacs avec tous ces gars qui frappent dedans ne m'ont plus quitté. <br><br>
+    Quelques années plus tard, la famille Farrugia s'installe à Arras, dans le Pas-de-Calais, région férue du noble art. Antoine y signe sa première licence, mais ne dispute son premier combat « qu'à 16 ans, à Pantin (Seine-Saint-Denis) ». Après une honnête carrière amateur et près de 80 combats, il raccroche les gants. Sa soif de devenir entraîneur le mène dans les plus grandes salles parisiennes.<br><br>
+    Mettre le palmarès ..
+    </p>
+    
+    <div class="histoire-avatar">
         <img src="/image/AFarrugia.png">
         <span>
             <p>"Tu peux être le meilleur entraîneur du monde, mais tu n’es rien si tu n’as pas les boxeurs qui te font connaître."</p>
@@ -20,11 +23,25 @@
             <p>Antoine FARRUGIA.</p>
         </span>
     </div>
-
     
 </div>
 
-<span>Quelques années plus tard, la famille Farrugia s'installe à Arras, dans le Pas-de-Calais, région férue du noble art. Antoine y signe sa première licence, mais ne dispute son premier combat « qu'à 16 ans, à Pantin (Seine-Saint-Denis) ». Après une honnête carrière amateur et près de 80 combats, il raccroche les gants. Sa soif de devenir entraîneur le mène dans les plus grandes salles parisiennes, où il apprend les ficelles du métier. Chez M. Jean Bretonnel ou auprès de François Rodriguez, Antoine observe tout. « Je donnais un coup de main partout. J'ai appris sur le tas. Pour les bandages, c'est pareil », confie Farrugia, qui s'en fait une spécialité, au point d'être sollicité par les plus grands manageurs et promoteurs. « J'ai pas mal observé les Américains que j'ai côtoyés en travaillant avec Louis et Michel Acariès. J'ai pris ce qu'il y a de meilleur chez eux. Je l'ai amélioré en y mettant ma touche personnelle. »</span>
+<div class="histoire_image">
+
+    <img src="/image/père/afarrugia1.jpeg" class="">
+    <img src="/image/père/afarrugia2.png" class="" >
+    <img src="/image/père/afarrugia3.jpeg" class="">
+    <img src="/image/père/afarrugia4.jpeg" class="">
+    <img src="/image/père/afarrugia5.jpeg" class="">
+    
+</div>
+    {#
+    {% for data in image %}
+        <img src="/image/{{ data }}" class="" style="width: 100px; height: 100px; border: 2px solid">
+    {% endfor %}
+    #}
+
+
 
 </div>
 

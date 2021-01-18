@@ -1,11 +1,13 @@
 {% extends "base.html.twig" %}
 
+{% block title %}{% endblock %}
+
 {% block body %}
+    
+<h1 class="text-center mt-4">Gestions des Médias </h1>
 
-<h1 class="text-center mt-4">Gestions des Médias</h1>
-
-<div class="text-center m-4">
-    {% if request.pathInfo == '/admin/accueil' or request.pathInfo == '/admin' %}
+    <div class="text-center m-4">
+        {% if request.pathInfo == '/admin/accueil' or request.pathInfo == '/admin' %}
         <a href="{{path('admin_accueil')}}" class="btn bg-danger">Gestions Accueil</a>
     {% else %}
         <a href="{{path('admin_accueil')}}" class="btn">Gestions Accueil</a>
@@ -34,5 +36,33 @@
     {% else %}
         <a href="{{path('admin_user')}}" class="btn">Gestion des Utilisateurs </a>
     {% endif %}
+    </div>
+
+<div class="container">
+
+<table class="table table-bordered text-center shadow">
+    <tr>
+        {% for data in tableau %}
+            <th>{{ data|upper }}</th>
+        {% endfor %}
+            <th>MODIFIER</th>
+            <th>SUPPRIMER</th>
+    </tr>
+    <tr>
+        {% for data in champion %}
+            <td>{{ data.id }}</td>
+            <td>{{ data.nom }}</td>
+            <td><img src="/image/{{ data.image }}" style="width:50px; height:50px;"></td>
+            <td>{{ data.palmares }}</td>
+            <td class="align-middle"><a href="{{ path('admin_champion_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
+            <td class="align-middle"><a href="{{ path('admin_champion_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer ce champion ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
+        {% endfor %}
+    </tr>
+</table>
+
+<a href="{{ path('admin_champion_create') }}" class="btn btn-dark mb-4">Ajouter un Champion</a>
+
+
 </div>
+
 {% endblock %}

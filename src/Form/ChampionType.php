@@ -2,20 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Accueil;
+use App\Entity\Champion;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class AccueilType extends AbstractType
+class ChampionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
-            ->add('description')
+            ->add('nom')
             ->add('image', FileType::class, [
                 //Afficher le champ du formulaire comme non mappé afin que symfony n'essaye pas d'obtenir sa valeur avec son entity
                 'mapped' => false,
@@ -36,13 +35,14 @@ class AccueilType extends AbstractType
                     ])
                 ],
             ])
+            ->add('palmares')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Accueil::class,
+            'data_class' => Champion::class,
         ]);
     }
 }

@@ -27,11 +27,6 @@ class Site
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $Google;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -57,18 +52,6 @@ class Site
     public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getGoogle(): ?string
-    {
-        return $this->Google;
-    }
-
-    public function setGoogle(?string $Google): self
-    {
-        $this->Google = $Google;
 
         return $this;
     }
