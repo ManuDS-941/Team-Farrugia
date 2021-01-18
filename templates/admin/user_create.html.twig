@@ -24,6 +24,10 @@
         {{ form_row(formUser.confirm_password, {'label': "Confirmer votre mot de passe", 'attr': {'class': 'form-control'}}) }}
     </div>
 
+    <div class="form-group">
+        {{ form_row(formUser.roles, {'label': false}, {'attr': {'class': 'form-control'}} ) }}
+    </div>
+
     <div class="text-center">
         <button type="submit" class="col-12 btn btn-dark mt-4 mb-4">Ajouter</button>
     </div>

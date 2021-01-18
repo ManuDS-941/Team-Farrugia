@@ -11,8 +11,10 @@ use App\Entity\Accueil;
 use App\Entity\Horaire;
 use App\Entity\Message;
 use App\Form\TarifType;
+use App\Entity\Champion;
 use App\Form\AccueilType;
 use App\Form\HoraireType;
+use App\Form\ChampionType;
 use App\Entity\Information;
 use App\Form\InscriptionType;
 use App\Repository\SiteRepository;
@@ -21,11 +23,15 @@ use App\Repository\TarifRepository;
 use App\Repository\AccueilRepository;
 use App\Repository\HoraireRepository;
 use App\Repository\MessageRepository;
+use App\Repository\ChampionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminController extends AbstractController
 {
@@ -68,7 +74,7 @@ class AdminController extends AbstractController
      * @Route("/admin/accueil/create", name="admin_accueil_create")
      * @Route("/admin/accueil/edit/{id}", name="admin_accueil_edit")
      */
-    public function AjoutAccueil(Accueil $accueil = null, Request $request, EntityManagerInterface $manager): Response
+    public function AjoutAccueil(Accueil $accueil = null, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
         if(!$accueil)
         {
@@ -83,11 +89,38 @@ class AdminController extends AbstractController
 
         if( $formAccueil->isSubmitted() && $formAccueil->isValid())
         {
+            
+            // Partie Image
+            // Déclaration de la variable ou sera stocké les éléments du champs Image
+            /** @var UploadedFile $imageFile */
+            $imageFile = $formAccueil->get('image')->getData();
+
+            // Cette condition est nécessaire car le champs image n'est pas requis dans les paramètres de AccueilType
+            if($imageFile){
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // Il a besoin pour le sauvegarder d'inclure une partie du nom du fichier depuis l'URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Déplacement des fichier vers le dossier où il doivent etre stocké
+                try{
+                    $imageFile->move(
+                        $this->getParameter('repertoire_image'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                // Gère le fichier si quelque chose se produit pendant son téléchargement
+                }
+                // Permet de stocker le nom du fichier comme nouveau fichier
+                $accueil->setImage($newFilename);
+            }
+            // Fin Image
+
             if(!$accueil->getId())
             {
                 $accueil->setCreatedAt(new \DateTime());
             }
-            
+
             $manager->persist($accueil);
             $manager->flush();
 
@@ -98,6 +131,7 @@ class AdminController extends AbstractController
             ]);
         }
 
+        dump($request);
 
         return $this->render('admin/accueil_create.html.twig', [
             'formAccueil' => $formAccueil->createView()
@@ -106,28 +140,107 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/accueil/delete/{id}", name="admin_accueil_delete")
      */
-    public function DeleteAccueil(EntityManagerInterface $manager, Accueil $accueil)
+    public function DeleteAccueil(EntityManagerInterface $manager, Accueil $accueil): Response
     {
         $manager->remove($accueil);
         $manager->flush();
 
         $this->addFlash('success', "L'article de l'accueil a bien été supprimé");
 
-        $this->redirectToRoute('admin_accueil');
+        return $this->redirectToRoute('admin_accueil');
     }
 
     /**
      * @Route("/admin/medias", name="admin_medias")
      */
-    public function GestionMédias(Request $request, MessageRepository $repo): Response
+    public function GestionMédias(Request $request, MessageRepository $repo, ChampionRepository $repo1, EntityManagerInterface $manager): Response
     {
+        $tableau = $manager->getClassMetadata(Champion::class)->getFieldNames();
+
         $message = $repo->findAll();
+        $champion = $repo1->findAll();
 
         return $this->render('admin/gestion_medias.html.twig', [
             'controller_name' => 'AdminController',
             'request' => $request,
             'message' => $message,
+            'champion' => $champion,
+            'tableau' => $tableau
         ]);
+    }
+
+    /**
+     * @Route("/admin/champion/create", name="admin_champion_create")
+     * @Route("/admin/champion/edit/{id}", name="admin_champion_edit")
+     */
+    public function AjoutChampion(Champion $champion = null, EntityManagerInterface $manager, Request $request, SluggerInterface $slugger): Response
+    {
+        if(!$champion)
+        {
+            $champion = new Champion;
+        }
+
+        $formChampion = $this->createForm(ChampionType::class, $champion);
+
+        $formChampion->handleRequest($request);
+        
+        dump($request);
+
+        if( $formChampion->isSubmitted() && $formChampion->isValid())
+        {
+            
+            // Partie Image
+            // Déclaration de la variable ou sera stocké les éléments du champs Image
+            /** @var UploadedFile $imageFile */
+            $imageFile = $formChampion->get('image')->getData();
+
+            // Cette condition est nécessaire car le champs image n'est pas requis dans les paramètres de AccueilType
+            if($imageFile){
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // Il a besoin pour le sauvegarder d'inclure une partie du nom du fichier depuis l'URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Déplacement des fichier vers le dossier où il doivent etre stocké
+                try{
+                    $imageFile->move(
+                        $this->getParameter('repertoire_image'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                // Gère le fichier si quelque chose se produit pendant son téléchargement
+                }
+                // Permet de stocker le nom du fichier comme nouveau fichier
+                $champion->setImage($newFilename);
+            }
+            // Fin Image
+
+            $manager->persist($champion);
+            $manager->flush();
+
+            $this->addFlash('success', "Le champion a bien été ajouté !!");
+
+            return $this->redirectToRoute('admin_medias', [
+                'id' => $champion->getId() // On transmet le nouvel ID
+            ]);
+        }
+
+        return $this->render('admin/admin_champion_create.html.twig', [
+            'formChampion' => $formChampion->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/champion/delete/{id}", name="admin_champion_delete")
+     */
+    public function DeleteChampion(EntityManagerInterface $manager, Champion $champion): Response
+    {
+        $manager->remove($champion);
+        $manager->flush();
+
+        $this->addFlash('success', "Le Champion a bien été supprimé");
+
+        return $this->redirectToRoute('admin_medias');
     }
 
     /**
@@ -209,7 +322,7 @@ class AdminController extends AbstractController
 
         $this->addFlash('success', "L'horaire a bien été supprimé");
 
-        $this->redirectToRoute('admin_info');
+        return $this->redirectToRoute('admin_info');
     }
 
     /**
@@ -333,7 +446,7 @@ class AdminController extends AbstractController
 
         $this->addFlash('success', "Le message a bien été supprimé");
 
-        $this->redirectToRoute('admin_message');
+        return $this->redirectToRoute('admin_message');
     }
     /**
      * @Route("/admin/user", name="admin_user")
@@ -410,6 +523,6 @@ class AdminController extends AbstractController
 
         $this->addFlash('success', "L'utilisateur a bien été supprimé");
 
-        $this->redirectToRoute('admin_user');
+        return $this->redirectToRoute('admin_user');
     }
 }

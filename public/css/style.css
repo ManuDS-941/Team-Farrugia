@@ -156,6 +156,10 @@ label #btn, label #cancel {
     text-align: center;
 }
 
+.card{
+    margin-top: 50px;
+}
+
 /* FIN ACCUEIL */
 
 /* HISTOIRE */
@@ -169,19 +173,36 @@ label #btn, label #cancel {
     min-width: 300px;
 }
 
-.histoire-image {
+.histoire-avatar {
     font-size: 13px;
     margin-bottom: 20px;
 }
 
-.histoire-image img {
+.histoire-avatar img {
     width: 400px;
     margin-bottom: 15px;
 }
 
-.histoire-image span {
+.histoire-avatar span {
     width: 300px;
     text-align: end;
+}
+
+.histoire_image img{
+    width: 100px; 
+    height: 100px; 
+    border: 3px solid;
+}
+
+.histoire_image img:hover{
+    transform: translateY(-420px);
+    position: absolute;
+    /* left: 5%; */
+    transition: all ease 1.5s;
+    width: 500px;
+    height: 500px;
+    border: 5px solid red;
+    border-radius: 2%;
 }
 
 /* Responsive */
@@ -194,9 +215,24 @@ label #btn, label #cancel {
     .histoire span p {
         text-align: center;
     }
-    .histoire-image {
+    .histoire-avatar {
         margin-bottom: 100px;
     }
+    .histoire_image{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .histoire_image img{
+        margin: 10px 0;
+    }
+    .histoire_image img:hover{
+        transform: translateY(0);
+        width: 70%;
+        height: 70%;
+        position: unset;
+    }
+    
 }
 
 /* FIN HISTOIRE */
@@ -245,8 +281,7 @@ footer {
     width: 100%;
     text-align: center;
     border-top: 4px solid red;
-    /* position: absolute;
-    top: 81.8vh; */
+    margin-top: 50px;
 }
 
 footer .partenaire {
@@ -256,28 +291,44 @@ footer .partenaire {
 }
 
 .copy {
-    text-align: center;
+    padding-left: 10px;
     padding-bottom: 20px;
     font-size: 12px;
+    text-align: start;
 }
 
 .mention{
     font-size: 13px;
-    padding-top: 25px;
+    text-align: start;
+    padding-left: 10px;
+    line-height: 23px;
 }
 .mention a{
-    padding: 10px;
     text-decoration: none;
     color: white;
 }
 .mention a:hover{
     color: red;
 }
+.propos{
+    text-align: start;
+    padding-left: 10px;
+}
 
 /* RESPONSIVE */
 @media (max-width: 944px) {
+    .propos{
+        text-align: center;
+        padding-left: 0;
+    }
     .mention{
         padding-bottom: 25px;
+        text-align: center;
+        padding-left: 0;
+    }
+    .copy{
+        text-align: center;
+        padding-left: 0;
     }
 }
 

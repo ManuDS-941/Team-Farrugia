@@ -67,6 +67,7 @@
                 <td>{{ data.jour1 }}</td>
                 <td>{{ data.jour2 }}</td>
                 <td>{{ data.jour3 }}</td>
+                <td>{{ data.entraineur }}</td>
                 <td class="align-middle"><a href="{{ path('admin_horaire_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
                 <td class="align-middle"><a href="{{ path('admin_horaire_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer cet horaire ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
             </tr>
@@ -111,7 +112,7 @@
 
     <h2 class="text-center">Site ({{ site|length }})</h2>
     
-    <table class="table table-responsive table-bordered mt-4 shadow">
+    <table class="table table-bordered mt-4 shadow">
         <tr class="text-center">
             {% for data in tableau2 %}
                 <th>
@@ -126,7 +127,7 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.titre }}</td>
                 <td>{{ data.adresse|slice(0,100)|raw }}</td>
-                <td>{{ data.google|slice(1,100)|raw }} ...</td>
+                {#<td>{{ data.google|slice(1,100)|raw }} ...</td>#}
                 <td class="align-middle"><a href="{{ path('admin_site_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
                 <td class="align-middle"><a href="{{ path('admin_site_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer ce site ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
             </tr>

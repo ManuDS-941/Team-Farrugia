@@ -10,36 +10,7 @@
 
     <h2 class="my-4">Horaires d'ouvertures</h2>
 
-    <div class="row horaires text-danger">
-        <div class="col-md-3">
-            Educative : <br>
-            <p>
-                Lundi : 18h - 19h
-            </p> 
-        </div>
-
-    <div class="col-md-3">
-        <p>
-            Lundi : 19h30 - 21h30 <br>
-            Mercredi : 19h30 - 21h30<br>
-            Vendredi : 19h30 - 21h30
-        </p>
-    </div>
-
-    <div class="col-md-3">
-        12ans/15ans :<br>
-        <p>
-            Mardi : 18h - 19h30<br>
-            Vendredi : 18h - 19h30
-        </p>
-    </div>
-
-    <div class="col-md-3">
-        Amateur Pro : <br>
-        <p>
-            Lundi au Vendredi : 19h30 - 21h30
-        </p>
-    </div>
+    <div class="row horaires">
 
     
         {% for data in horaire %}
@@ -47,27 +18,41 @@
                 {{ data.titre }} <br>
                 <p>
                     {{ data.jour1 }} <br>
+                    {% if data.jour2 == "-" %}
+                    {% else %}
                     {{ data.jour2 }} <br>
+                    {% endif %}
+                    {% if data.jour3 == "-" %}
+                    {% else %}
                     {{ data.jour3 }}
+                    {% endif %} <br><br>
+                    {% if data.entraineur == "" %}
+                    {% elseif data.entraineur == "Come Delaborde" %}
+                    Entraineur/Stagiaire : {{ data.entraineur }}
+                    {% else %}
+                    Entraineur : {{ data.entraineur }}
+                    {% endif %}
                 </p>
             </div>
         {% endfor %}    
-    
-
+        
     </div>
+
+    <div class="row mt-4">
+        <div class="stagiaire col-md-12">
+            Entraineur / Stagiaire : Phillippe Legrand et Adel Jallad
+        </div>
+    </div>
+    
 
     <h2 class="my-4">Tarif</h2>
 
-    <div class="tarif text-danger">
-        Educative : 150 € <br>
-        Côme : 250 € <br>
-        12ans/15ans : 200 € <br>
-        Amateur Pro :  €
-    </div>
-
-    {% for data in tarif %}
+    <div class="tarif">
+        
+        {% for data in tarif %}
         {{ data.titre }} : {{ data.prix }} € <br>
-    {% endfor %}
+        {% endfor %}
+    </div>
 
     <h2 class="my-4">Site</h2>
 
@@ -77,8 +62,7 @@
     {% endfor %}
 
     <div class="googlemap text-center m-4">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.809537560299!2d1.9440025156786143!3d48.76643341513109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6836d91985ad1%3A0x7a3d5e09eae5fcf1!2sPalais%20de%20Sports%20d&#39;%C3%89lancourt!5e0!3m2!1sfr!2sfr!4v1609591685514!5m2!1sfr!2sfr" width="600" height="450" frameborder="0" style="border:1px solid; border-radius: 5px;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2629.809537560299!2d1.9440025156786143!3d48.76643341513109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6836d91985ad1%3A0x7a3d5e09eae5fcf1!2sPalais%20de%20Sports%20d&#39;%C3%89lancourt!5e0!3m2!1sfr!2sfr!4v1609591685514!5m2!1sfr!2sfr" width="400" height="400" frameborder="0" style="border:1px solid; border-radius: 5px;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
 
 

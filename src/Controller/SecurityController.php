@@ -58,6 +58,11 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('admin_user'); // redirige vers la page admin_user
         }
 
+        // A rajouter a la place de l'autre une fois que sa sera fini
+        // return $this->render('admin/user_create.html.twig', [
+        //     'formInscription' => $formInscription->createView()
+        // ]); 
+
         return $this->render('admin/inscription.html.twig', [
             'formInscription' => $formInscription->createView()
         ]);
@@ -71,7 +76,7 @@ class SecurityController extends AbstractController
         // SI l'internaute est connecté, il n'a rien a faire sur la route '/connexion', on le redirige vers la route '/admin'
         if($authChecker->isGranted('ROLE_ADMIN'))
         {
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_accueil');
         }
         else if($authChecker->isGranted('ROLE_USER'))
         {

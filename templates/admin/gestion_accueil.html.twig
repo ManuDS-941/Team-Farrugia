@@ -57,21 +57,21 @@
                 <th>MODIFER</th>
                 <th>SUPPRIMER</th>
             </tr>
+            {% for data in accueil %}
             <tr class="text-center">
-                {% for data in accueil %}
                     <td>{{ data.id }}</td>
                     <td>{{ data.titre }}</td>
-                    <td>{{ data.image }}</td>
+                    <td><img src="/image/{{ data.image }}" style="width:50px; height:50px;"></td>
                     <td>{{ data.description }}</td>
                     <td>{{ data.createdAt|date('d/m/Y')}} à {{ data.createdAt|date('H:i') }}</td>
                     <td class="align-middle"><a href="{{ path('admin_accueil_edit', {'id': data.id }) }}" class="btn btn-success text-white"><i class="fas fa-edit fa-1x"></i></a></td>
                     
-                    <td class="align-middle"><a href="{{ path('admin_accueil_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer cet utilisateur ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
-                {% endfor %}
-            </tr>
+                    <td class="align-middle"><a href="{{ path('admin_accueil_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer cet article ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
+                </tr>
+            {% endfor %}
         </table>
         
-        <a href="{{ path('admin_accueil_create') }}" class="btn btn-dark">Ajouter un Article</a>
+        <a href="{{ path('admin_accueil_create') }}" class="btn btn-dark mb-4">Ajouter un Article</a>
     
     </div>
 

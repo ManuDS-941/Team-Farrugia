@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
-use App\Repository\AccueilRepository;
-use App\Repository\HoraireRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TarifRepository;
+use App\Repository\AccueilRepository;
+use App\Repository\HoraireRepository;
+use App\Repository\ChampionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,10 +41,12 @@ class VitrineController extends AbstractController
     /**
      * @Route("/medias", name="medias")
      */
-    public function Medias(): Response
+    public function Medias(ChampionRepository $repo): Response
     {
+        $champion = $repo->findAll();
+
         return $this->render('vitrine/medias.html.twig', [
-            'controller_name' => 'VitrineController',
+            'champion' => $champion
         ]);
     }
 
@@ -95,5 +98,20 @@ class VitrineController extends AbstractController
         return $this->render('vitrine/contact.html.twig', [
             'formContact' => $formContact->createView()
         ]);
+    }
+    /**
+     * @Route("/mention", name="mention")
+     */
+    public function Mention(): Response
+    {
+        return $this->render('vitrine/mention.html.twig');
+    }
+
+    /**
+     * @Route("/politique", name="politique")
+     */
+    public function Politique(): Response
+    {
+        return $this->render('vitrine/politique.html.twig');
     }
 }

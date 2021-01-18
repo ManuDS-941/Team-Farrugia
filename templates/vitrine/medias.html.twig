@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-md-6">
-                <h3>Alexandra Hutten - Czapski</h3>
+                <h3>Alexandra Hutten</h3>
                 <p>Challenger au titre nationale Pro 2020</p>
                 <p>Championne de France Amateur</p>
                 <p>Vice Championne d'Europe Amateur</p>
@@ -55,26 +55,25 @@
             
         </div>
 
-        
-        {#<div class="row mb-4">
+        {% for data in champion %}
+            
+        <div class="row mb-4">
             <div class="col-md-6">
                 <img src="/image/{{ data.image }}" alt="">
             </div>
-
+            
             <div class="col-md-6">
-                <h3>{{ data.title }}</h3>
-
-                {{ data.description }}
-                <p>3 fois Champion de France</p>
-                <p>2 fois Champion d'Europe</p>
-                <p>Champion WBA International</p>
-                <p>Vice Champion d'Europe</p>
-                <p>Classé 10e WBA</p>
-                <p>2e Européen</p>
+                <h3>{{ data.nom }}</h3>
+                
+                <p>{{ data.palmares }}</p>
+                
             </div>
-        </div>#}
+        </div>
+        {% endfor %}
+        
 
 
     </div>
 </div>
+
 {% endblock %}

@@ -23,7 +23,7 @@ class Accueil
     private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $image;
 
@@ -54,17 +54,21 @@ class Accueil
         return $this;
     }
 
-    public function getImage(): ?string
+
+
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image)
     {
         $this->image = $image;
 
         return $this;
     }
+
+
 
     public function getDescription(): ?string
     {

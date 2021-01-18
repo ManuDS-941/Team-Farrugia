@@ -37,6 +37,11 @@ class Horaire
      */
     private $jour3;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $entraineur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Horaire
     public function setJour3(string $jour3): self
     {
         $this->jour3 = $jour3;
+
+        return $this;
+    }
+
+    public function getEntraineur(): ?string
+    {
+        return $this->entraineur;
+    }
+
+    public function setEntraineur(?string $entraineur): self
+    {
+        $this->entraineur = $entraineur;
 
         return $this;
     }

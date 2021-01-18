@@ -6,9 +6,20 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *      fields = {"username"},
+ *      message="Ce nom d'utilisateur est déjà existant, veuillez en saisir un nouveau !",
+ *      groups={"registration"}
+ * )
+ * @UniqueEntity(
+ *      fields = {"email"},
+ *      message="Cet email est déjà existant, veuillez en saisir un nouveau !",
+ *      groups={"registration"}
+ * )
  */
 class User implements UserInterface
 {
@@ -21,11 +32,18 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min="2",
+     *      minMessage="Votre mon d'utilisateur doit contenir minimum 2 caratères"
+     * )
+     * @Assert\NotBlank(message="Veuillez renseigner un nom d'utilisateur")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez renseigner un Email")
+     * @Assert\Email(message="Veuillez saisir une adresse Email valide")
      */
     private $email;
 
