@@ -24,21 +24,9 @@ class SecurityController extends AbstractController
     // UserPasswordEncoderInterface : Permet d'encoder un élément
     // AuthorizationCheckerInterface : Permet de maintenir la connexion
     {
-
-        // SI l'internaute est connecté, il n'a rien a faire sur la route '/inscription', on le redirige vers la route '/accueil'
-        if($authChecker->isGranted('ROLE_ADMIN'))
-        {
-            return $this->redirectToRoute('admin');
-        }
-        else if($authChecker->isGranted('ROLE_USER'))
-        {
-            return $this->redirectToRoute('accueil');
-        }
-
         $user = new User; // Définit un nouvel User dans la variable $user
 
-        dump($request); // On verifie les valeurs de saisie du formulaire
-
+        // dump($request); // On verifie les valeurs de saisie du formulaire
 
         $formInscription = $this->createForm(InscriptionType::class, $user, ['validation_groups' => ['registration']]); // On génère un formulaire dans la variable $formInscription à partir des données de RegistrationType, ces données seront stockés dans la variable $user avec les contraintes défini dans registration (ne pas oublier mettre a jour le fichier security.yaml)
 
@@ -59,13 +47,13 @@ class SecurityController extends AbstractController
         }
 
         // A rajouter a la place de l'autre une fois que sa sera fini
-        // return $this->render('admin/user_create.html.twig', [
-        //     'formInscription' => $formInscription->createView()
-        // ]); 
-
         return $this->render('admin/inscription.html.twig', [
             'formInscription' => $formInscription->createView()
-        ]);
+        ]); 
+
+        // return $this->render('admin/inscription.html.twig', [
+        //     'formInscription' => $formInscription->createView()
+        // ]);
     }
     
     /**
@@ -73,14 +61,10 @@ class SecurityController extends AbstractController
      */
     public function Connexion(AuthorizationCheckerInterface $authChecker, AuthenticationUtils $authenticationUtils): Response
     {
-        // SI l'internaute est connecté, il n'a rien a faire sur la route '/connexion', on le redirige vers la route '/admin'
+        // SI l'internaute est connecté, on le redirige vers la route '/admin'
         if($authChecker->isGranted('ROLE_ADMIN'))
         {
             return $this->redirectToRoute('admin_accueil');
-        }
-        else if($authChecker->isGranted('ROLE_USER'))
-        {
-            return $this->redirectToRoute('accueil');
         }
 
         // Récupération du message d'erreur en cas de mauvaise connexion

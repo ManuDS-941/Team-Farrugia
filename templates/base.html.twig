@@ -50,19 +50,20 @@
                 {% if app.user %}
 
                 
-                    <li><a href="{{ path('admin')}}">Admin</a>
+                    <li><a href="{{ path('admin_accueil')}}" class="admin">Admin</a>
                         <ul>
-                            <li>
-                                <a href="{{ path('deconnexion')}}">Deconnexion</a>
+                            <li >
+                                <a href="{{ path('deconnexion')}}" >Deconnexion</a>
                             </li>
                         </ul>
                     </li>
-                
+
+                {# N'apparait que en responsive #}
+                <li class="deco"><a href="{{ path('deconnexion')}}" >Deconnexion</a></li>
 
                 {% else %}   
                 
-                    <li><a href="{{ path('connexion') }}">Connexion</a></li> 
-                    {# <li><a href="{{ path('admin_accueil') }}">Admin</a></li> #}
+                    <li><a href="{{ path('connexion') }}">Connexion</a></li>
 
                 {% endif %} 
 
@@ -90,10 +91,10 @@
 
                 <div class="col-md-3 p-4 mb-4 reseaux">
                     <h5>NOS RESEAUX :</h5>
-                    <div class="icon-box pt-4">
-                        <a class="btnrs youtube" href="" target="blank"> 
+                    <div class="icon-box pt-4 mt-4 pb-4">
+                        {# <a class="btnrs youtube" href="" target="blank"> 
                             <i class="fab fa-youtube icon"></i>
-                        </a>
+                        </a> #}
                         <a class="btnrs facebook" href="https://www.facebook.com/CRAUDINcorinne5/" target="blank">
                             <i class="fab fa-facebook-f icon"></i>
                         </a>

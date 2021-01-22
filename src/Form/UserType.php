@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserType extends AbstractType
@@ -16,18 +17,19 @@ class UserType extends AbstractType
         $builder
             ->add('username')
             ->add('email')
-            ->add('password')
-            ->add('roles', CollectionType::class, [
-                'label_format' => "Role d'utilisateur :",
-                'entry_type' => ChoiceType::class,
-                'entry_options' => [
-                    'choices' => [
-                        'Utilisateur' => 'ROLE_USER',
-                        'Administrateur' => 'ROLE_ADMIN'
-                    ],
-                    'attr' => [ 'class' => "form-control"]
-                ]
-            ])
+            //->add('password', PasswordType::class)
+            //->add('confirm_password', PasswordType::class)
+            // ->add('roles', CollectionType::class, [
+            //     'label_format' => "Role d'utilisateur :",
+            //     'entry_type' => ChoiceType::class,
+            //     'entry_options' => [
+            //         'choices' => [
+            //             'Utilisateur' => 'ROLE_USER',
+            //             'Administrateur' => 'ROLE_ADMIN'
+            //         ],
+            //         'attr' => [ 'class' => "form-control"]
+            //     ]
+            // ])
         ;
     }
 

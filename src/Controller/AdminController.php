@@ -7,6 +7,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\Tarif;
 use App\Form\SiteType;
+use App\Form\UserType;
 use App\Entity\Accueil;
 use App\Entity\Horaire;
 use App\Entity\Message;
@@ -472,23 +473,17 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/user/create", name="admin_user_create")
      * @Route("/admin/user/edit/{id}", name="admin_user_edit")
      */
-    public function AjoutUser(User $user = null, Request $request, EntityManagerInterface $manager): Response
+    public function AjoutUser(User $user, Request $request, EntityManagerInterface $manager): Response
     // On rajoute = null car sinon symfony cherche a récupérer un pays en BDD
     // Request $request : récupère les données du formulaire dans la variable $request
     // EntityManagerInterface : Sert a manipuler la BDD
     {
-        if(!$user) // Si le user selectionné n'est pas nul on fait alors une modification et on entre pas dans le IF
-        {
-            $user = new User;
-        }
-
         // dump($request); // On controle les valeurs saisie
         // dump($user); // On controle si user est bien null
 
-        $formUser = $this->createForm(InscriptionType::class, $user); // On créer le formulaire de UserType et on stock dans la variable $user
+        $formUser = $this->createForm(UserType::class, $user); // On créer le formulaire de UserType et on stock dans la variable $user
 
         $formUser->handleRequest($request); // Vérifie si tout les champs on été bien rempli et l'envoie dans le bon setter
 
@@ -499,16 +494,16 @@ class AdminController extends AbstractController
             $manager->persist($user); // On maintient l'insertion en BDD dans la variable $user
             $manager->flush(); // On execute l'insertion
 
-            $message = "L'utilisateur a bien été ajouté !!";
+            $message = "Les données de l'utilisateur ont bien été modfiées !!";
 
-            $this->addFlash('success', "L'utilisateur a bien été ajouté !!");
+            $this->addFlash('success', "Les données de l'utilisateur ont bien été modfiées !!");
 
             return $this->redirectToRoute('admin_user', [
                 'id' => $user->getId() // On transmet le nouvel ID de l'user
             ]);
         }
 
-        return $this->render('admin/user_create.html.twig', [
+        return $this->render('admin/user_edit.html.twig', [
             'formUser' => $formUser->createView(), // on créer une vision dans la variable formUser
         ]);
     }
