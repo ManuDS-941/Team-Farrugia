@@ -56,7 +56,7 @@ security:
             form_login:
                 login_path: connexion # on définit la route du formulaire de connexion
                 check_path: connexion # on définit la route ou les données de connexion vont être comparés
-                default_target_path: admin # renvoie automatiquement vers admin (grace a la fonction l'user lui sera refusé et renvoyer vers l'accueil)
+                default_target_path: admin_accueil # renvoie automatiquement vers admin (grace a la fonction l'user lui sera refusé et renvoyer vers l'accueil)
 
             logout:
                 path: deconnexion

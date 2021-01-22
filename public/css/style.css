@@ -98,6 +98,31 @@ label #btn, label #cancel {
     display: none;
 }
 
+/* SOUS MENU */
+
+.deco{
+    display: none;
+}
+
+nav ul li ul{ 
+    display:none; 
+}
+
+nav ul li:hover ul{
+    z-index:99999;
+    display: list-item !important;
+    position: absolute;
+    margin-left: -50px;
+    transition: 5s all step-end;
+    background-color: rgb(39, 35, 35);
+}
+
+nav ul li:hover ul li {
+    float: none;
+    }
+
+/* RESPONSIVE NAVBAR */
+
 @media (max-width: 1118px) {}
 
 @media (max-width: 944px) {
@@ -139,6 +164,9 @@ label #btn, label #cancel {
         display: none;
     }
     #check:checked~label #cancel {
+        display: block;
+    }
+    .deco{
         display: block;
     }
 }
