@@ -51,8 +51,8 @@
                     <th>SUPPRIMER</th>
             </tr>
             
-            <tr class="text-center">
-                {% for data in message %}
+            {% for data in message %}
+                <tr class="text-center">
 
                 <td>{{ data.id }}</td>
                 <td>{{ data.nom }}</td>
@@ -63,9 +63,9 @@
                     
                 <td><a href="mailto:{{ data.email }}" class="btn btn-success text-white"><i class="fas fa-envelope"></i></a></td>
                 <td class="align-middle"><a href="{{ path('admin_message_delete', {'id': data.id }) }}" class="btn btn-danger text-white" onclick="return(confirm('Voulez vous vraiment supprimer ce message ?'))"><i class="fas fa-trash fa-1x"></i></a></td>
-                {% endfor %}
                 
-            </tr>
+                </tr>
+            {% endfor %}
         </table>
     </div>
     

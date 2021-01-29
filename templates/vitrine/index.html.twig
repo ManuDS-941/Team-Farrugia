@@ -5,6 +5,14 @@
 {% block body %}
 
 <div class="container">
+    
+    
+    {% for message in app.flashes('success') %}
+    <div class="bg-success text-white mt-4 text-center col-md-4 mx-auto rounded p-3 mb-3">
+        {{ message }}
+    </div>
+    {% endfor %}
+    
     <h1 class="accueil-titre">BIENVENUE A LA TEAM FARRUGIA</h1>
 
     <div class="interview">

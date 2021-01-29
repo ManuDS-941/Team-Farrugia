@@ -1,0 +1,23 @@
+{# {% extends "base.html.twig" %} #}
+
+{% block body %}
+
+Bonjour,
+
+<p>
+    Vous venez de recevoir un message de {{ message.prenom }} {{ message.nom }}
+</p><br>
+<p>
+    L'objet de son message est le suivant : {{ message.objet }}
+</p><br>
+<p>
+    Vous pouvez consulter le message sur la plateforme de notre site internet.
+</p><br>
+<p>
+    Bien Cordialement.
+</p><br><br>
+<p>
+    Team Farrugia
+</p>
+
+{% endblock %}
