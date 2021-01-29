@@ -322,12 +322,12 @@ footer .partenaire {
     padding-left: 10px;
     padding-bottom: 20px;
     font-size: 12px;
-    text-align: start;
+    text-align: center;
 }
 
 .mention{
     font-size: 13px;
-    text-align: start;
+    text-align: center;
     padding-left: 10px;
     line-height: 23px;
 }
@@ -339,7 +339,7 @@ footer .partenaire {
     color: red;
 }
 .propos{
-    text-align: start;
+    text-align: center;
     padding-left: 10px;
 }
 
